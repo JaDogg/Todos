@@ -26,19 +26,25 @@ class MainWindow extends Component {
     }
 
     componentDidUpdate() {
-        fs.writeFile(dataLocation, JSON.stringify(this.state.todos), 'utf-8', function(err) {
-            if(err) {
-                console.log(err);
-            }
-        });
+        fs
+            .writeFile(dataLocation, JSON.stringify(this.state.todos), 'utf-8', function (err) {
+                if (err) {
+                    console.log(err);
+                }
+            });
     }
 
     onInsertTodo(event) {
         if (event.which == 13 || event.keyCode == 13) {
-            var text = $('#todoInput').val().trim();
+            var text = $('#todoInput')
+                .val()
+                .trim();
             $('#todoInput').val('');
             if (text) {
-                var todos = this.state.todos.slice(0);
+                var todos = this
+                    .state
+                    .todos
+                    .slice(0);
                 todos.push({text: text, done: false});
                 this.setState({todos: todos});
             }
@@ -81,13 +87,14 @@ class MainWindow extends Component {
         });
 
         return (
-            <div>
+            <div className="container">
                 <input
                     className="form-control"
                     id="todoInput"
                     type="text"
                     placeholder="Todo..."
-                    onKeyPress={this.onInsertTodo}/> {todos}
+                    onKeyPress={this.onInsertTodo}/>
+                <ul className="list-group">{todos}</ul>
             </div>
         );
     }

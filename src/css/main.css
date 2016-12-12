@@ -1,5 +1,4 @@
 @import '../../bower_components/bootstrap/dist/css/bootstrap.css';
-
 html {
   font-family: 'Roboto', sans-serif;
 }
@@ -12,15 +11,43 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  padding:5px;
+  padding: 5px;
 }
 
-.todo {
+.trash {
+  color: rgb(209, 91, 71);
+}
+
+.flag {
+  color: rgb(248, 148, 6);
+}
+
+.container {
+  padding: 0px;
+}
+
+.container .glyphicon,
+.list-group-item .glyphicon {
+  margin-right: 5px;
+}
+
+.container .radio,
+.checkbox {
   display: inline-block;
-  vertical-align: middle;
-  height: 30px;
-  width: 100%;
-  cursor: default;
-  font-size: 20px;
-  margin: 2px;
+  margin: 0px;
+}
+
+.container input[type=checkbox]:checked+label {
+  text-decoration: line-through;
+  color: rgb(128, 144, 160);
+}
+
+.list-group-item:hover,
+a.list-group-item:focus {
+  text-decoration: none;
+  background-color: rgb(245, 245, 245);
+}
+
+.list-group {
+  margin-bottom: 0px;
 }

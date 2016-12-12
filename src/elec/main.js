@@ -17,6 +17,6 @@ app.on('ready', function () {
     appWindow.once('ready-to-show', function () {
         appWindow.show();
     });
-    appWindow.setMenu(null);
+    //appWindow.setMenu(null);
     
 });
