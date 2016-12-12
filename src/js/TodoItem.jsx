@@ -1,36 +1,32 @@
 import React, {Component} from 'react';
 
+const marginOne = {
+    marginLeft: 1
+}
+
 class TodoItem extends Component {
     constructor(props, context) {
         super(props, context);
+        this.onTodoMarked = this
+            .onTodoMarked
+            .bind(this);
+    }
+
+    onTodoMarked() {
+        this.props.onChange(this.props.index, !this.props.done);
     }
 
     render() {
-        var checkbox;
-        if (this.props.done) {
-            checkbox = (<input
-                style={{
-                marginLeft: 1
-            }}
-                type="checkbox"
-                id={"checkbox" + this.props.index}
-                checked
-                onChange={() => this.props.onChange(this.props.index, !this.props.done)}/>);
-        } else {
-            checkbox = (<input
-                style={{
-                marginLeft: 1
-            }}
-                type="checkbox"
-                id={"checkbox" + this.props.index}
-                onChange={() => this.props.onChange(this.props.index, !this.props.done)}/>);
-        }
-
         return (
             <li className="list-group-item">
                 <div className="checkbox">
-                    {checkbox}
-                    <label onClick={() => this.props.onChange(this.props.index, !this.props.done)}>
+                    <input
+                        style={marginOne}
+                        type="checkbox"
+                        id={"checkbox" + this.props.index}
+                        onChange={this.onTodoMarked}
+                        checked={this.props.done}/>
+                    <label onClick={this.onTodoMarked}>
                         {this.props.text}
                     </label>
                 </div>
