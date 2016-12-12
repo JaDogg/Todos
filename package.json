@@ -1,0 +1,51 @@
+{
+  "name": "todo-tree",
+  "version": "0.0.1",
+  "description": "ToDoTree",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "main": "build/main.js",
+  "scripts": {
+    "start": "gulp",
+    "pack": "electron-packager . Todos --out ../Todos"
+  },
+  "private": true,
+  "devDependencies": {
+    "babel-core": "^6.3.26",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-latest": "^6.16.0",
+    "babel-preset-react": "^6.3.13",
+    "babelify": "^7.3.0",
+    "browser-sync": "^2.11.0",
+    "browserify": "^13.1.1",
+    "electron": "^1.4.10",
+    "electron-packager": "^8.3.0",
+    "gulp": "^3.9.1",
+    "gulp-concat-css": "^2.3.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-notify": "^2.2.0",
+    "gulp-run": "^1.7.1",
+    "gulp-sourcemaps": "^1.9.1",
+    "gulp-uglify": "^2.0.0",
+    "gulp-util": "^3.0.1",
+    "pretty-hrtime": "^1.0.1",
+    "require-dir": "^0.3.0",
+    "underscore": "^1.8.3",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.6.1"
+  },
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "lodash": "^4.17.2",
+    "marked": "^0.3.6",
+    "material-ui": "^0.16.0",
+    "react": "^15.4.0",
+    "react-bootstrap": "^0.30.7",
+    "react-desktop": "^0.2.14",
+    "react-dom": "^15.4.0",
+    "react-tap-event-plugin": "^2.0.0"
+  }
+}

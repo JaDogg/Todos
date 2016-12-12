@@ -1,0 +1,26 @@
+@import '../../bower_components/bootstrap/dist/css/bootstrap.css';
+
+html {
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background: #ffffff;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  padding:5px;
+}
+
+.todo {
+  display: inline-block;
+  vertical-align: middle;
+  height: 30px;
+  width: 100%;
+  cursor: default;
+  font-size: 20px;
+  margin: 2px;
+}
