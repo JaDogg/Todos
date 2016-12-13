@@ -9,7 +9,7 @@
   "main": "build/main.js",
   "scripts": {
     "start": "gulp",
-    "pack": "electron-packager . Todos --out ../Todos"
+    "pack": "electron-packager . Todos --out ../Todos --icon icons/Todo"
   },
   "private": true,
   "devDependencies": {
