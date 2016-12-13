@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import TodoItem from './TodoItem.jsx';
 import $ from 'jquery';
+import Modal from 'react-bootstrap-modal'
 var fs = eRequire('fs');
 var savedTodos = JSON.parse(fs.readFileSync(dataLocation));
 
@@ -20,8 +21,23 @@ class MainWindow extends Component {
             .onTodoDelete
             .bind(this);
 
+        this.onEditModalHide = this
+            .onEditModalHide
+            .bind(this);
+
+        this.onTodoEdit = this
+            .onTodoEdit
+            .bind(this);
+
+        this.onTodoEditSave = this
+            .onTodoEditSave
+            .bind(this);
+
         this.state = {
-            todos: savedTodos
+            todos: savedTodos,
+            editVisible: false,
+            editIndex: -1,
+            editText: ''
         };
     }
 
@@ -62,6 +78,23 @@ class MainWindow extends Component {
         this.setState({todos: todos});
     }
 
+    onTodoEdit(index, text) {
+        this.setState({editVisible: true, editIndex: index, editText: text});
+    }
+
+    onTodoEditSave() {
+        var text = $('#todoEdit').val().trim();
+        $('#todoEdit').val('');
+        var todos = this
+            .state
+            .todos
+            .slice(0);
+        if (text) {
+            todos[this.state.editIndex]["text"] = text;
+        }
+        this.setState({editVisible: false, editIndex: -1, editText: '', todos: todos});
+    }
+
     onTodoDelete(index) {
         var todos = this
             .state
@@ -69,6 +102,10 @@ class MainWindow extends Component {
             .slice(0);
         todos.splice(index, 1);
         this.setState({todos: todos});
+    }
+
+    onEditModalHide() {
+        this.setState({editVisible: false});
     }
 
     render() {
@@ -83,18 +120,52 @@ class MainWindow extends Component {
                 text={item.text}
                 done={item.done}
                 onChange={this.onTodoChange}
-                onDelete={this.onTodoDelete}/>);
+                onDelete={this.onTodoDelete}
+                onEdit={this.onTodoEdit}/>);
         });
 
         return (
             <div className="container">
-                <input
-                    className="form-control"
-                    id="todoInput"
-                    type="text"
-                    placeholder="Todo..."
-                    onKeyPress={this.onInsertTodo}/>
+                <div className="input-group primary-text">
+                    <span className="input-group-addon">
+                        <span
+                            style={{
+                            marginRight: 0
+                        }}
+                            className="glyphicon glyphicon-plus"></span>
+                    </span>
+                    <input
+                        className="form-control"
+                        id="todoInput"
+                        type="text"
+                        placeholder="Todo..."
+                        onKeyPress={this.onInsertTodo}/>
+                </div>
                 <ul className="list-group">{todos}</ul>
+
+                <Modal
+                    show={this.state.editVisible}
+                    onHide={this.onEditModalHide}
+                    aria-labelledby="ModalHeader">
+                    <Modal.Header closeButton>
+                        <Modal.Title id='ModalHeader'>Edit Todo Item</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <input
+                            className="form-control"
+                            id="todoEdit"
+                            type="text"
+                            placeholder="Todo..."
+                            onKeyPress={this.onTodoNewTextSave}
+                            defaultValue={this.state.editText}/>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Modal.Dismiss className='btn btn-default'>Cancel</Modal.Dismiss>
+                        <button className='btn btn-primary' onClick={this.onTodoEditSave}>
+                            Save
+                        </button>
+                    </Modal.Footer>
+                </Modal>
             </div>
         );
     }

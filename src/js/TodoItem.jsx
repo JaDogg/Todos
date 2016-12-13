@@ -31,7 +31,7 @@ class TodoItem extends Component {
                     </label>
                 </div>
                 <div className="pull-right action-buttons">
-                    <a href="#">
+                    <a href="#" onClick={() => this.props.onEdit(this.props.index, this.props.text)}>
                         <span className="glyphicon glyphicon-pencil"></span>
                     </a>
                     <a

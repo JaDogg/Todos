@@ -1,10 +1,12 @@
 @import '../../bower_components/bootstrap/dist/css/bootstrap.css';
+@import '../../node_modules/react-bootstrap-modal/lib/styles/rbm-patch.css';
+
 html {
-  font-family: 'Roboto', sans-serif;
+  font-family: sans-serif;
 }
 
 body {
-  background: #ffffff;
+  background: url('../images/back.png');
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -24,6 +26,10 @@ body {
 
 .container {
   padding: 0px;
+}
+
+.primary-text {
+  margin-bottom: 5px;
 }
 
 .container .glyphicon,
