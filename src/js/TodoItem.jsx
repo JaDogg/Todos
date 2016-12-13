@@ -37,7 +37,7 @@ class TodoItem extends Component {
                     <a
                         href="#"
                         className="trash"
-                        onClick={() => this.props.onDelete(this.props.index)}>
+                        onClick={() => this.props.onDelete(this.props.index, this.props.text)}>
                         <span className="glyphicon glyphicon-trash"></span>
                     </a>
                 </div>

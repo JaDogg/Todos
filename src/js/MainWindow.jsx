@@ -21,6 +21,14 @@ class MainWindow extends Component {
             .onTodoDelete
             .bind(this);
 
+        this.onTodoDeleteOk = this
+            .onTodoDeleteOk
+            .bind(this);
+
+        this.onDeleteModalHide = this
+            .onDeleteModalHide
+            .bind(this);
+
         this.onEditModalHide = this
             .onEditModalHide
             .bind(this);
@@ -36,6 +44,7 @@ class MainWindow extends Component {
         this.state = {
             todos: savedTodos,
             editVisible: false,
+            deleteModalVisible: false,
             editIndex: -1,
             editText: ''
         };
@@ -83,7 +92,9 @@ class MainWindow extends Component {
     }
 
     onTodoEditSave() {
-        var text = $('#todoEdit').val().trim();
+        var text = $('#todoEdit')
+            .val()
+            .trim();
         $('#todoEdit').val('');
         var todos = this
             .state
@@ -95,17 +106,25 @@ class MainWindow extends Component {
         this.setState({editVisible: false, editIndex: -1, editText: '', todos: todos});
     }
 
-    onTodoDelete(index) {
+    onEditModalHide() {
+        this.setState({editVisible: false});
+    }
+
+    onTodoDelete(index, text) {
+        this.setState({deleteModalVisible: true, editIndex: index, editText: text});
+    }
+
+    onTodoDeleteOk() {
         var todos = this
             .state
             .todos
             .slice(0);
-        todos.splice(index, 1);
-        this.setState({todos: todos});
+        todos.splice(this.state.editIndex, 1);
+        this.setState({deleteModalVisible: false, editIndex: -1, editText: '', todos: todos});
     }
 
-    onEditModalHide() {
-        this.setState({editVisible: false});
+    onDeleteModalHide() {
+        this.setState({deleteModalVisible: false});
     }
 
     render() {
@@ -142,7 +161,7 @@ class MainWindow extends Component {
                         onKeyPress={this.onInsertTodo}/>
                 </div>
                 <ul className="list-group">{todos}</ul>
-
+                {/* -------- Edit Todo Item -------------- */}
                 <Modal
                     show={this.state.editVisible}
                     onHide={this.onEditModalHide}
@@ -163,6 +182,24 @@ class MainWindow extends Component {
                         <Modal.Dismiss className='btn btn-default'>Cancel</Modal.Dismiss>
                         <button className='btn btn-primary' onClick={this.onTodoEditSave}>
                             Save
+                        </button>
+                    </Modal.Footer>
+                </Modal>
+                {/* ---------------- Delete Todo Item --------------- */}
+                <Modal
+                    show={this.state.deleteModalVisible}
+                    onHide={this.onDeleteModalHide}
+                    aria-labelledby="ModalHeader">
+                    <Modal.Header closeButton>
+                        <Modal.Title id='ModalHeader'>Delete Todo Item</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        Are you sure you want to delete item '{this.state.editText}' ?
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Modal.Dismiss className='btn btn-default'>Cancel</Modal.Dismiss>
+                        <button className='btn btn-primary' onClick={this.onTodoDeleteOk}>
+                            Delete
                         </button>
                     </Modal.Footer>
                 </Modal>
